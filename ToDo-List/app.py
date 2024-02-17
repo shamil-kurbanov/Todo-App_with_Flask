@@ -29,36 +29,39 @@ def home():
         return render_template('base.html', todo_list=todo_list) 
 
 
+#Define route for editing a todo task
 @app.route('/edit/<int:id>', methods=['POST'])
 def edit(id):
-    todo_to_edit = Todo.query.get(id)
-    new_title = request.form.get('new_title')
-    todo_to_edit.title = new_title
-    db.session.commit()
-    return redirect(url_for('home'))
+    todo_to_edit = Todo.query.get(id) # Get the todo task to edit based on its ID
+    new_title = request.form.get('new_title') # Get the new title for the todo task from the form
+    todo_to_edit.title = new_title  # Update the title of the todo task
+    db.session.commit()    # Commit the changes to the database
+    return redirect(url_for('home'))  # Redirect to the home page to refresh the todo list
 
 
+# Define route for deleting a todo task
 @app.route('/delete/<int:id>', methods=['POST', 'GET'])
 def delete(id):
     if request.method == 'POST':
-        todo_to_delete = Todo.query.get(id)
-        db.session.delete(todo_to_delete)
-        db.session.commit()
-        return redirect(url_for('home'))
+        todo_to_delete = Todo.query.get(id)  # Get the todo task to delete based on its ID
+        db.session.delete(todo_to_delete)  # Delete the todo task from the database
+        db.session.commit #Commit the changes to the database
+        return redirect(url_for('home')) # Redirect to the home page to refresh the todo list
     else:
         # 
         return redirect(url_for('home'))
 
-
+# Define route for toggling the completion status of a todo task
 @app.route('/toggle_complete/<int:id>', methods=['POST'])
 def toggle_complete(id):
-    todo_to_toggle = Todo.query.get(id)
-    todo_to_toggle.completed = not todo_to_toggle.completed
-    db.session.commit()
-    return redirect(url_for('home'))
+    todo_to_toggle = Todo.query.get(id) # Get the todo task to toggle completion status based on its ID
+    todo_to_toggle.completed = not todo_to_toggle.completed  # Toggle the completion status of the todo task
+    db.session.commit()  # Commit the changes to the database
+    return redirect(url_for('home'))  # Redirect to the home page to refresh the todo list
 
 
+# Main entry point of the application
 if __name__ == "__main__":
-    with app.app_context():
+    with app.app_context():  # Create all database tables if they do not exist
         db.create_all()
-    app.run(debug=True)
+    app.run(debug=True) # Run the Flask application in debug mode
