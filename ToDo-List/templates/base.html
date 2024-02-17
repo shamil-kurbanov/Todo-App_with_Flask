@@ -3,35 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TODO-Liste</title>
+    <title>TODO List</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
 </head>
 <body>
     <header>
         <nav>
-            <!-- Hier kannst du deine Navigationslinks einfügen -->
+            <!-- You can insert your navigation links here -->
             <ul>
-                <li><a href="#">Startseite</a></li>
-                <li><a href="#">Über uns</a></li>
-                <!-- Weitere Links hier -->
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <!-- More links here -->
             </ul>
         </nav>
     </header>
 
-    <h1>TODO-Liste</h1>
+    <h1>TODO List</h1>
     <div class="container">
         <form method="POST" class="todo-form">
             <table>
                 <tr>
                     <td>
-                        <input type="text" name="title" placeholder="Aufgabe hinzufügen" required>
+                        <input type="text" name="title" placeholder="Add task" required>
                     </td>
                     <td>
-                        <button type="submit">Hinzufügen</button>
+                        <button type="submit">Add</button>
                     </td>
-                </tr>
             </table>
         </form>
+    </div>
+    <div class="todo-list"
         <ul class="todo-list">
             {% for todo in todo_list %}
                 {% set index = loop.index %}
@@ -48,21 +49,21 @@
                             </td>
                             <td>
                                 <form method="POST" action="{{ url_for('edit', id=todo.id) }}">
-                                    <input type="text" name="new_title" placeholder="Neuer Titel" required>
-                                    <button type="submit" id="edit-btn-{{ todo.id }}">Bearbeiten</button>
+                                    <input type="text" name="new_title" placeholder="New Title" required>
+                                    <button type="submit" id="edit-btn-{{ todo.id }}">Edit</button>
                                 </form>
                             </td>
                             <td>
                                 <form method="POST" action="{{ url_for('delete', id=todo.id) }}">
-                                    <button type="submit" id="delete-btn-{{ todo.id }}">Löschen</button>
+                                    <button type="submit" id="delete-btn-{{ todo.id }}">Delete</button>
                                 </form>
                             </td>
                             <td>
                                 <form method="POST" action="{{ url_for('toggle_complete', id=todo.id) }}">
                                     {% if todo.completed %}
-                                        <button type="submit" id="complete-btn-{{ todo.id }}">Als erledigt markieren</button>
+                                        <button type="submit" id="complete-btn-{{ todo.id }}">Mark as incomplete</button>
                                     {% else %}
-                                        <button type="submit" id="complete-btn-{{ todo.id }}">Als unerledigt markieren</button>
+                                        <button type="submit" id="complete-btn-{{ todo.id }}">Mark as complete</button>
                                     {% endif %}
                                 </form>
                             </td>
@@ -74,12 +75,12 @@
     </div>
 
     <footer>
-        <!-- Hier kannst du den Footer-Inhalt einfügen -->
-        <p>© 2024 TODO-Liste</p>
+        <!-- You can insert footer content here -->
+        <p>© 2024 TODO List</p>
         <ul>
-            <li><a href="#">Datenschutz</a></li>
+            <li><a href="#">Privacy Policy</a></li>
             <li><a href="#">Impressum</a></li>
-            <!-- Weitere Links hier -->
+            <!-- More links here -->
         </ul>
     </footer>
 </body>

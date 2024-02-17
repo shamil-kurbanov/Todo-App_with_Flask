@@ -89,3 +89,17 @@ footer ul li a {
 .title-cell {
     width: 300px; /* Breite der Zelle für den Titel */
 }
+
+/* Standard-Stile für die todo-liste */
+.todo-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+/* Media Query für kleinere Bildschirme (z. B. Smartphones) */
+@media only screen and (max-width: 600px) {
+    .todo-list {
+        /* Anpassung der Darstellung für kleinere Bildschirme */
+        /* Zum Beispiel: Verkleinerung der Schriftgröße, Änderung der Spaltenbreite */
+    }
+}
